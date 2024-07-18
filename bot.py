@@ -31,7 +31,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     data = query.data
 
     if data == 'address':
-        await query.edit_message_text(text="Адреси склад: ...")
+        await query.edit_message_text(text="Адреси склад: ТОчикистон")
     elif data == 'prices':
         await query.edit_message_text(text="Нархнома: ...")
     elif data == 'prohibited':
