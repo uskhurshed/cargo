@@ -1,7 +1,7 @@
 import logging
 import pandas as pd
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, Filters, ContextTypes
+from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
 
 # Включаем логирование
 logging.basicConfig(
@@ -10,8 +10,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Загрузка данных из CSV
-data = pd.read_csv('data.csv')
+# Загрузка данных из CSV с указанием кодировки
+data = pd.read_csv('data.csv', encoding='cp1252')  # попробуйте 'latin1', если 'cp1252' не работает
 
 # Функция для команды /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -31,7 +31,7 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     data = query.data
 
     if data == 'address':
-        await query.edit_message_text(text="Адреси склад: ТОчикистон")
+        await query.edit_message_text(text="Адреси склад: ...")
     elif data == 'prices':
         await query.edit_message_text(text="Нархнома: ...")
     elif data == 'prohibited':
@@ -74,7 +74,7 @@ def main():
     application.add_handler(CallbackQueryHandler(button))
 
     # Регистрируем обработчик сообщений
-    application.add_handler(MessageHandler(Filters.text & ~Filters.command, check_track_code))
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, check_track_code))
 
     # Запускаем бота
     application.run_polling()
