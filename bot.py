@@ -10,8 +10,12 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Загрузка данных из CSV с указанием кодировки
-data = pd.read_csv('data.csv', encoding='cp1252')  # попробуйте 'latin1', если 'cp1252' не работает
+# Загрузка данных из CSV с указанием кодировки и разделителя
+try:
+    data = pd.read_csv('data.csv', encoding='latin1', delimiter=';')
+    logger.info("Данные успешно загружены из data.csv")
+except Exception as e:
+    logger.error(f"Ошибка при загрузке данных из data.csv: {e}")
 
 
 # Функция для команды /start
@@ -48,13 +52,16 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         await query.edit_message_text(text="Обунаро ба дастгирӣ гирифтед!")
 
 
+# Функция для проверки трек-кода
 async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     track_code = update.message.text
-    result = data[data['трек-код'] == int(track_code)]
+    logger.info(f"Получен трек-код: {track_code}")
+    result = data[data['âà¥ª-ª®¤'] == int(track_code)]
+    logger.info(f"Результат поиска: {result}")
 
     if not result.empty:
-        status_china = result['Хитой'].values[0]
-        status_khujand = result['Хучанд'].values[0]
+        status_china = result['•¨â®©'].values[0]
+        status_khujand = result['•ãç ­¤'].values[0]
         response = f"Трек-код: {track_code}\n"
 
         if status_china:
@@ -69,13 +76,16 @@ async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     else:
         response = "Трек-код не найден."
 
+    logger.info(f"Ответ: {response}")
     await update.message.reply_text(response)
 
 
+# Функция для команды /help
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text('Напишите /start для начала общения со мной.')
 
 
+# Главная функция
 def main():
     # Вставьте сюда токен, который вы получили от @BotFather
     TOKEN = '7463604205:AAFX7fk2JTk3UHrZQp0NBl9w9KOfebVBXd0'
