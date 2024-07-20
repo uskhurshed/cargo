@@ -5,7 +5,7 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Mess
 
 # Включаем логирование
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelлевel)s - %(message)s',
+    format='%(asctime)s - %(name)s - %(levellevel)s - %(message)s',
     level=logging.INFO
 )
 logger = logging.getLogger(__name__)
@@ -88,6 +88,12 @@ def main():
     # Регистрируем обработчики команд
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
+    application.add_handler(CommandHandler("address", start))
+    application.add_handler(CommandHandler("prices", start))
+    application.add_handler(CommandHandler("prohibited", start))
+    application.add_handler(CommandHandler("contact", start))
+    application.add_handler(CommandHandler("track_code", start))
+    application.add_handler(CommandHandler("subscribe", start))
 
     # Регистрируем обработчик нажатий на кнопки
     application.add_handler(CallbackQueryHandler(button))
