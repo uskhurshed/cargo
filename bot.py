@@ -56,12 +56,12 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     track_code = update.message.text
     logger.info(f"Получен трек-код: {track_code}")
-    result = data[data['âà¥ª-ª®¤'] == int(track_code)]
+    result = data[data['code'] == int(track_code)]
     logger.info(f"Результат поиска: {result}")
 
     if not result.empty:
-        status_china = result['•¨â®©'].values[0]
-        status_khujand = result['•ãç ­¤'].values[0]
+        status_china = result['china'].values[0]
+        status_khujand = result['khujand'].values[0]
         response = f"Трек-код: {track_code}\n"
 
         if status_china:
