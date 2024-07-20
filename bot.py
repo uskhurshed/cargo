@@ -17,7 +17,6 @@ try:
 except Exception as e:
     logger.error(f"Ошибка при загрузке данных из data.csv: {e}")
 
-
 # Функция для команды /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = [
@@ -30,7 +29,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text('Меню:', reply_markup=reply_markup)
-
 
 # Функция для обработки нажатий на кнопки
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -51,7 +49,6 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     elif data == 'subscribe':
         await query.edit_message_text(text="Обунаро ба дастгирӣ гирифтед!")
 
-
 # Функция для проверки трек-кода
 async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     track_code = update.message.text
@@ -64,26 +61,21 @@ async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         status_khujand = result['khujand'].values[0]
         response = f"Трек-код: {track_code}\n"
 
-        if status_china:
-            response += "Статус в Хитой: Прибыл\n"
-        else:
-            response += "Статус в Хитой: В пути\n"
-
         if status_khujand:
-            response += "Статус в Хучанд: Прибыл\n"
+            response += "Ваш заказ по треккоду прибыл в Худжанд, ожидайте звонка от оператора."
+        elif status_china:
+            response += "Ваш заказ по треккоду прибыл в Китай и будет отправлен в Худжанд в ближайшие дни."
         else:
-            response += "Статус в Хучанд: В пути\n"
+            response += "Ваш товар еще не пришел на склад."
     else:
-        response = "Трек-код не найден."
+        response = "Ваш трек-код не найден."
 
     logger.info(f"Ответ: {response}")
     await update.message.reply_text(response)
 
-
 # Функция для команды /help
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text('Напишите /start для начала общения со мной.')
-
 
 # Главная функция
 def main():
@@ -105,7 +97,6 @@ def main():
 
     # Запускаем бота
     application.run_polling()
-
 
 if __name__ == '__main__':
     main()
