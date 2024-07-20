@@ -5,7 +5,7 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Mess
 
 # Включаем логирование
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levellevel)s - %(message)s',
+    format='%(asctime)s - %(name)s - %(levelлевel)s - %(message)s',
     level=logging.INFO
 )
 logger = logging.getLogger(__name__)
@@ -62,9 +62,9 @@ async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         response = f"Трек-код: {track_code}\n"
 
         if status_khujand:
-            response += "Ваш заказ по треккоду прибыл в Худжанд, ожидайте звонка от оператора."
+            response += "Ваш заказ по трек-коду прибыл в Худжанд, ожидайте звонка от оператора."
         elif status_china:
-            response += "Ваш заказ по треккоду прибыл в Китай и будет отправлен в Худжанд в ближайшие дни."
+            response += "Ваш заказ по трек-коду прибыл в Китай и будет отправлен в Худжанд в ближайшие дни."
         else:
             response += "Ваш товар еще не пришел на склад."
     else:
