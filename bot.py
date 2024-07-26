@@ -22,7 +22,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = [
         [InlineKeyboardButton("Адреси склад 📍", callback_data='address'),
          InlineKeyboardButton("Нархнома 💲", callback_data='prices')],
-        [InlineKeyboardButton("Молҷои манъшуда ❌", callback_data='prohibited'),
+        [InlineKeyboardButton("Молхои манъшуда ❌", callback_data='prohibited'),
          InlineKeyboardButton("Контакт 👤", callback_data='contact')],
         [InlineKeyboardButton("Тафтиши трек-код 🔍", callback_data='track_code')],
         [InlineKeyboardButton("Обуна шудан 👤", callback_data='subscribe')],
@@ -37,13 +37,32 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     data = query.data
 
     if data == 'address':
-        await query.edit_message_text(text="Адреси склад: ...")
+        await query.edit_message_text(text="1) НОМ ВА НОРЕРИ ШУМО 
+2)15857907645
+3) 浙江省义乌市江东街道梅湖新村14栋3单元201室 sugd/ 
+4)шахр/ном ва номери дастии шумо")
     elif data == 'prices':
-        await query.edit_message_text(text="Нархнома: ...")
+        await query.edit_message_text(text="Нархнома:
+
+1кг - 2,5$
+
+1куб - 280$
+
+Аз 500грам кам 20с")
     elif data == 'prohibited':
-        await query.edit_message_text(text="Молҷои манъшуда: ...")
+        await query.edit_message_text(text="КАРГОИ МО ХАМИН ГУНА ЧИЗОРА ҚАБУЛ НАМЕКУНАД!
+
+1. Дорувори (парашок таблетка дорухои обаки).
+
+2. Ҳамаи намуди чизе ки обаки хастанд (Духи ва ғайра).
+
+3. Ҳамаи намуди силоҳи сард (корча, электрошокер ба монанди инхо, бита ва ғайра) умуман манъ аст.
+
+4. Электронный сигарет, калян ба монанди хамин чизо кабул намекунем.
+
+Агар ягон чизи шишагин дошта бошед пешаки бо админ маслихат кунед.")
     elif data == 'contact':
-        await query.edit_message_text(text="Контакт: ...")
+        await query.edit_message_text(text="Контакт : www.instagram.com/somon_sugd_cargo")
     elif data == 'track_code':
         await query.edit_message_text(text="Введите трек-код:")
     elif data == 'subscribe':
