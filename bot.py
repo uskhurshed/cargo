@@ -5,7 +5,7 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Mess
 
 # Включаем логирование
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levellevel)s - %(message)s',
+    format='%(asctime)s - %(name)s - %(levelлевel)s - %(message)s',
     level=logging.INFO
 )
 logger = logging.getLogger(__name__)
@@ -37,18 +37,19 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     data = query.data
 
     if data == 'address':
-        await query.edit_message_text(text="Адреси склад: ...")
+        await query.edit_message_text(
+            text="1) НОМ ВА НОРЕРИ ШУМО \n2)15857907645\n3) 浙江省义乌市江东街道梅湖新村14栋3单元201室 sugd/ \n4)шахр/ном ва номери дастии шумо")
     elif data == 'prices':
-        await query.edit_message_text(text="Нархнома: ...")
+        await query.edit_message_text(text="Нархнома:\n\n1кг - 2,5$\n\n1куб - 280$\n\nАз 500грам кам 20с")
     elif data == 'prohibited':
-        await query.edit_message_text(text="Молҷои манъшуда: ...")
+        await query.edit_message_text(
+            text="КАРГОИ МО ХАМИН ГУНА ЧИЗОРА ҚАБУЛ НАМЕКУНАД!\n\n1. Дорувори (парашок таблетка дорухои обаки).\n\n2. Ҳамаи намуди чизе ки обаки хастанд (Духи ва ғайра).\n\n3. Ҳамаи намуди силоҳи сард (корча, электрошокер ба монанди инхо, бита ва ғайра) умуман манъ аст.\n\n4. Электронный сигарет, калян ба монанди хамин чизо кабул намекунем.\n\nАгар ягон чизи шишагин дошта бошед пешаки бо админ маслихат кунед.")
     elif data == 'contact':
-        await query.edit_message_text(text="Контакт: ...")
+        await query.edit_message_text(text="Контакт : www.instagram.com/somon_sugd_cargo")
     elif data == 'track_code':
         await query.edit_message_text(text="Введите трек-код:")
     elif data == 'subscribe':
         await query.edit_message_text(text="Обунаро ба дастгирӣ гирифтед!")
-
 # Функция для проверки трек-кода
 async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     track_code = update.message.text
@@ -88,12 +89,6 @@ def main():
     # Регистрируем обработчики команд
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
-    application.add_handler(CommandHandler("address", start))
-    application.add_handler(CommandHandler("prices", start))
-    application.add_handler(CommandHandler("prohibited", start))
-    application.add_handler(CommandHandler("contact", start))
-    application.add_handler(CommandHandler("track_code", start))
-    application.add_handler(CommandHandler("subscribe", start))
 
     # Регистрируем обработчик нажатий на кнопки
     application.add_handler(CallbackQueryHandler(button))
