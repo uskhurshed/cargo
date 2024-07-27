@@ -1,6 +1,6 @@
 import logging
 import pandas as pd
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import Update,  ReplyKeyboardMarkup
 from telegram.ext import Application, CommandHandler, CallbackQueryHandler, MessageHandler, filters, ContextTypes
 
 # Включаем логирование
@@ -19,16 +19,18 @@ except Exception as e:
 
 # Функция для команды /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+
     keyboard = [
-        [InlineKeyboardButton("Адреси склад 📍", callback_data='address'),
-         InlineKeyboardButton("Нархнома 💲", callback_data='prices')],
-        [InlineKeyboardButton("Молҷои манъшуда ❌", callback_data='prohibited'),
-         InlineKeyboardButton("Контакт 👤", callback_data='contact')],
-        [InlineKeyboardButton("Тафтиши трек-код 🔍", callback_data='track_code')],
-        [InlineKeyboardButton("Обуна шудан 👤", callback_data='subscribe')],
+        ["Адреси склад 📍", "Нархнома 💲"],
+        ["Молҷои манъшуда ❌", "Контакт 👤"],
+        ["Тафтиши трек-код 🔍"],
+        ["Обуна шудан 👤"]
     ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
+
     await update.message.reply_text('Меню:', reply_markup=reply_markup)
+
 
 # Функция для обработки нажатий на кнопки
 async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
