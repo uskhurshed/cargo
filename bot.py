@@ -5,7 +5,7 @@ from telegram.ext import Application, CommandHandler, CallbackQueryHandler, Mess
 
 # Включаем логирование
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levellevel)s - %(message)s',
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
 logger = logging.getLogger(__name__)
@@ -37,30 +37,11 @@ async def button(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     data = query.data
 
     if data == 'address':
-        await query.edit_message_text(text="1) НОМ ВА НОРЕРИ ШУМО 
-2)15857907645
-3) 浙江省义乌市江东街道梅湖新村14栋3单元201室 sugd/ 
-4)шахр/ном ва номери дастии шумо")
+        await query.edit_message_text(text="1) НОМ ВА НОРЕРИ ШУМО \n2)15857907645\n3) 浙江省义乌市江东街道梅湖新村14栋3单元201室 sugd/ \n4)шахр/ном ва номери дастии шумо")
     elif data == 'prices':
-        await query.edit_message_text(text="Нархнома:
-
-1кг - 2,5$
-
-1куб - 280$
-
-Аз 500грам кам 20с")
+        await query.edit_message_text(text="Нархнома:\n\n1кг - 2,5$\n\n1куб - 280$\n\nАз 500грам кам 20с")
     elif data == 'prohibited':
-        await query.edit_message_text(text="КАРГОИ МО ХАМИН ГУНА ЧИЗОРА ҚАБУЛ НАМЕКУНАД!
-
-1. Дорувори (парашок таблетка дорухои обаки).
-
-2. Ҳамаи намуди чизе ки обаки хастанд (Духи ва ғайра).
-
-3. Ҳамаи намуди силоҳи сард (корча, электрошокер ба монанди инхо, бита ва ғайра) умуман манъ аст.
-
-4. Электронный сигарет, калян ба монанди хамин чизо кабул намекунем.
-
-Агар ягон чизи шишагин дошта бошед пешаки бо админ маслихат кунед.")
+        await query.edit_message_text(text="КАРГОИ МО ХАМИН ГУНА ЧИЗОРА ҚАБУЛ НАМЕКУНАД!\n\n1. Дорувори (парашок таблетка дорухои обаки).\n\n2. Ҳамаи намуди чизе ки обаки хастанд (Духи ва ғайра).\n\n3. Ҳамаи намуди силоҳи сард (корча, электрошокер ба монанди инхо, бита ва ғайра) умуман манъ аст.\n\n4. Электронный сигарет, калян ба монанди хамин чизо кабул намекунем.\n\nАгар ягон чизи шишагин дошта бошед пешаки бо админ маслихат кунед.")
     elif data == 'contact':
         await query.edit_message_text(text="Контакт : www.instagram.com/somon_sugd_cargo")
     elif data == 'track_code':
@@ -99,7 +80,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 # Главная функция
 def main():
     # Вставьте сюда токен, который вы получили от @BotFather
-    TOKEN = '7463604205:AAFX7fk2JTk3UHrZQp0NBl9w9KOfebVBXd0'
+    TOKEN = 'ВАШ_ТОКЕН'
 
     # Создаем объект Application и передаем ему токен вашего бота.
     application = Application.builder().token(TOKEN).build()
@@ -107,12 +88,6 @@ def main():
     # Регистрируем обработчики команд
     application.add_handler(CommandHandler("start", start))
     application.add_handler(CommandHandler("help", help_command))
-    application.add_handler(CommandHandler("address", start))
-    application.add_handler(CommandHandler("prices", start))
-    application.add_handler(CommandHandler("prohibited", start))
-    application.add_handler(CommandHandler("contact", start))
-    application.add_handler(CommandHandler("track_code", start))
-    application.add_handler(CommandHandler("subscribe", start))
 
     # Регистрируем обработчик нажатий на кнопки
     application.add_handler(CallbackQueryHandler(button))
