@@ -22,8 +22,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = [
         ["Адреси склад 📍", "Нархнома 💲"],
         ["Молҷои манъшуда ❌", "Контакт 👤"],
-        ["Тафтиши трек-код 🔍"],
-        ["Обуна шудан 👤"]
+        ["Тафтиши трек-код 🔍"]
+        # , ["Обуна шудан 👤"]
     ]
 
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
@@ -44,8 +44,8 @@ async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         response = "Контакт : www.instagram.com/somon_sugd_cargo"
     elif text == "Тафтиши трек-код 🔍":
         response = "Введите трек-код:"
-    elif text == "Обуна шудан 👤":
-        response = "Обунаро ба дастгирӣ гирифтед!"
+    # elif text == "Обуна шудан 👤":
+    #     response = "Обунаро ба дастгирӣ гирифтед!"
     else:
         response = None
 
