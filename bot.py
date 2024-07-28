@@ -29,7 +29,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
-    await update.message.reply_text('', reply_markup=reply_markup)
+    await update.message.reply_text('Меню:', reply_markup=reply_markup)
 
 
 # Функция для обработки сообщений с кнопок
