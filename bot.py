@@ -17,6 +17,7 @@ try:
 except Exception as e:
     logger.error(f"Ошибка при загрузке данных из data.csv: {e}")
 
+
 # Функция для команды /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = [
@@ -29,6 +30,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
     await update.message.reply_text('Меню:', reply_markup=reply_markup)
+
 
 # Функция для обработки сообщений с кнопок
 async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -55,6 +57,7 @@ async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         # Если текст не совпадает ни с одной из команд кнопок, то это может быть трек-код
         await check_track_code(update, context)
 
+
 # Функция для проверки трек-кода
 async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     track_code = update.message.text
@@ -68,25 +71,27 @@ async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         if not result.empty:
             status_china = result['china'].values[0]
             status_khujand = result['khujand'].values[0]
-            response = f"Трек-код: {track_code}\n"
 
             if status_khujand:
-                response += "Ваш заказ по трек-коду прибыл в Худжанд, ожидайте звонка от оператора."
+                response = f"Ваш заказ по трек-коду {track_code} прибыл в Худжанд, ожидайте звонка от оператора."
             elif status_china:
-                response += "Ваш заказ по трек-коду прибыл в Китай и будет отправлен в Худжанд в ближайшие дни."
+                response = (f"Ваш заказ по трек-коду {track_code} прибыл в Китай и будет отправлен в Худжанд в "
+                            f"ближайшие дни.")
             else:
-                response += "Ваш товар еще не пришел на склад."
+                response = f"Ваш товар по трек-коду {track_code} еще не пришел на склад."
         else:
             response = "Ваш трек-код не найден."
     else:
-        response = "Неверный формат трек-кода. Пожалуйста, введите числовой трек-код."
+        response = "Неверный формат. Пожалуйста, введите корректную команду."
 
     logger.info(f"Ответ: {response}")
     await update.message.reply_text(response)
 
+
 # Функция для команды /help
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text('Напишите /start для начала общения со мной.')
+
 
 # Главная функция
 def main():
@@ -105,6 +110,7 @@ def main():
 
     # Запускаем бота
     application.run_polling()
+
 
 if __name__ == '__main__':
     main()
