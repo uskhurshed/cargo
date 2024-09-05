@@ -79,7 +79,7 @@ async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -
         else:
             response = f"Бори Шумо бо трек-коди {track_code} холо ба склади Хитой кабул нашуааст."
     else:
-        response = f"Бори Шумо бо трек-коди {track_code} не найдено в базе."
+        response = f"Бори Шумо бо трек-коди {track_code} холо ба склади Хитой кабул нашуааст."
 
     logger.info(f"Ответ: {response}")
     await update.message.reply_text(response)
