@@ -59,33 +59,31 @@ async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
 
 # Функция для проверки трек-кода
+# Функция для проверки трек-кода
 async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     track_code = update.message.text
     logger.info(f"Получен трек-код: {track_code}")
 
-    # Проверка, что трек-код состоит только из цифр
-    if track_code.isdigit():
-        result = data[data['code'] == int(track_code)]
-        logger.info(f"Результат поиска: {result}")
+    # Выполняем поиск трек-кода
+    result = data[data['code'] == track_code]
+    logger.info(f"Результат поиска: {result}")
 
-        if not result.empty:
-            status_china = result['china'].values[0]
-            status_khujand = result['khujand'].values[0]
+    if not result.empty:
+        status_china = result['china'].values[0]
+        status_khujand = result['khujand'].values[0]
 
-            if status_khujand:
-                response = f"Бори Шумо бо трек-коди {track_code} ба Хучанд омадааст, мунтазири занг шавед."
-            elif status_china:
-                response = (f"Бори Шумо бо трек-коди {track_code} ба склади Хитой кабул шудааст рузхои наздик ба Хучанд омада мерасад. "
-                            f"")
-            else:
-                response = f"Бори Шумо бо трек-коди {track_code} холо ба склади Хитой кабул нашуааст."
+        if status_khujand:
+            response = f"Бори Шумо бо трек-коди {track_code} ба Хучанд омадааст, мунтазири занг шавед."
+        elif status_china:
+            response = (f"Бори Шумо бо трек-коди {track_code} ба склади Хитой кабул шудааст рузхои наздик ба Хучанд омада мерасад.")
         else:
-            response = "Бори Шумо бо трек-коди {track_code} холо ба склади Хитой кабул нашуааст."
+            response = f"Бори Шумо бо трек-коди {track_code} холо ба склади Хитой кабул нашуааст."
     else:
-        response = "Неверный формат. Пожалуйста, введите корректную команду."
+        response = f"Бори Шумо бо трек-коди {track_code} не найдено в базе."
 
     logger.info(f"Ответ: {response}")
     await update.message.reply_text(response)
+
 
 
 # Функция для команды /help
