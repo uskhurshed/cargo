@@ -42,7 +42,7 @@ async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         response = "1) НОМ ВА НОМЕРИ ШУМО \n2)13711652794\n3) 广州市荔湾区环市西路黑山三街20号宇宙鞋城E区113-119档8 Al-Kh /Шахр/Ном ва номери телефон"
         await update.message.reply_text(response)
         # Отправляем фото после текста
-        await update.message.reply_photo("https://raw.githubusercontent.com/uskhurshed/cargo/master/photo_2024-10-08_18-58-32.jpg")
+        await update.message.reply_photo("https://raw.githubusercontent.com/uskhurshed/cargo/master/photo_2024-10-08_19-49-26.jpg")
     
     elif text == "Нархнома 💲":
         response = "Нархнома:\n1кг - 2,5$\n1куб - 250$"
