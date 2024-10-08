@@ -36,6 +36,8 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     text = update.message.text
 
+    response = None  # Убираем двойное назначение
+
     if text == "Адреси склад 📍":
         response = "1) НОМ ВА НОМЕРИ ШУМО \n2)13711652794\n3) 广州市荔湾区环市西路黑山三街20号宇宙鞋城E区113-119档8 Al-Kh /Шахр/Ном ва номери телефон"
         await update.message.reply_text(response)
@@ -61,11 +63,7 @@ async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await update.message.reply_text(response)
 
     else:
-        response = None
-
-    if response:
-        await update.message.reply_text(response)
-    else:
+        # Если текст не совпадает ни с одной из команд кнопок, считаем его трек-кодом
         await check_track_code(update, context)
 
 
