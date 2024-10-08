@@ -71,11 +71,12 @@ async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     if not result.empty:
         status_china = result['china'].values[0]
         status_khujand = result['khujand'].values[0]
+        arrival_date = result['arrival_date'].values[0]  # Извлекаем дату прибытия на склад
 
         if status_khujand:
             response = f"Бори Шумо бо трек-коди {track_code} ба Хучанд омадааст, мунтазири занг шавед."
         elif status_china:
-            response = (f"Бори Шумо бо трек-коди {track_code} ба склади Хитой кабул шудааст рузхои наздик ба Хучанд омада мерасад.")
+            response = (f"Бори Шумо бо трек-коди {track_code} ба склади Хитой санаи {arrival_date} кабул шудааст ва рузхои наздик ба Хучанд омада мерасад.")
         else:
             response = f"Бори Шумо бо трек-коди {track_code} холо ба склади Хитой кабул нашуааст."
     else:
