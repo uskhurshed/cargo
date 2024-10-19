@@ -5,7 +5,7 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 
 # Включаем логирование
 logging.basicConfig(
-    format='%(asctime)s - %(name)s - %(levelname)s',
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO
 )
 logger = logging.getLogger(__name__)
@@ -23,17 +23,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = [
         ["Сурогаҳоҷ склад 📍", "Нарҳхо 💲"],
         ["Молҳои манъшуда ❌", "Контакт 👤"],
-        ["Тафтиши трек-код 🔍", "Дарси ройгон!"],
-        ["Регистрация 📝"]
+        ["Тафтиши трек-код 🔍", "Дарси ройгон!"]
     ]
 
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
-    await update.message.reply_text(
-        'Хуш омадед ба Telegram боти Сомон Сугд Карго. Ман ба шумо дар ёфтани суроғаҳои анбор, санҷидани трек код ва бо нархҳо шинос шудан кӯмак мекунам', 
-        reply_markup=reply_markup
-    )
-
+    await update.message.reply_text('Хуш омадед ба Telegram боти  Сомон Сугд Карго. Ман ба шумо дар ёфтани суроғаҳои анбор, санҷидани трек код ва бо нархҳо шинос шудан кӯмак мекунам', reply_markup=reply_markup)
 
 # Функция для обработки сообщений с кнопок
 async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -63,36 +58,12 @@ async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         response = "https://t.me/somon_sugd_cargo/31"
         await update.message.reply_text(response)
 
-    elif text == "Регистрация 📝":
-        await start_registration(update, context)
-
     else:
         # Если текст не совпадает ни с одной из команд кнопок, считаем его трек-кодом
         await check_track_code(update, context)
 
 
-# Функция для регистрации пользователя
-async def start_registration(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text("Введите ваше имя:")
-    return "NAME"  # Переход к этапу ввода имени
-
-# Обработка имени пользователя
-async def get_name(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    context.user_data['name'] = update.message.text
-    await update.message.reply_text("Теперь введите ваш номер телефона:")
-    return "PHONE"  # Переход к этапу ввода телефона
-
-# Обработка номера телефона
-async def get_phone(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    name = context.user_data['name']
-    phone = update.message.text
-
-    # Сохранение данных пользователя (можно сохранить в файл или базу данных)
-    with open('users_data.csv', 'a', encoding='utf-8') as file:
-        file.write(f"{name};{phone}\n")
-
-    await update.message.reply_text(f"Регистрация завершена!\nИмя: {name}\nТелефон: {phone}")
-
+# Функция для проверки трек-кода
 # Функция для проверки трек-кода
 async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     track_code = update.message.text
@@ -120,6 +91,7 @@ async def check_track_code(update: Update, context: ContextTypes.DEFAULT_TYPE) -
     await update.message.reply_text(response)
 
 
+
 # Функция для команды /help
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text('Напишите /start для начала общения со мной.')
@@ -128,7 +100,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
 # Главная функция
 def main():
     # Вставьте сюда токен, который вы получили от @BotFather
-    TOKEN = 'ВАШ ТОКЕН ЗДЕСЬ'
+    TOKEN = '7463604205:AAFX7fk2JTk3UHrZQp0NBl9w9KOfebVBXd0'
 
     # Создаем объект Application и передаем ему токен вашего бота.
     application = Application.builder().token(TOKEN).build()
@@ -140,13 +112,9 @@ def main():
     # Регистрируем обработчик сообщений с кнопок и трек-кодов
     application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_buttons))
 
-    # Регистрируем обработчики для этапов регистрации
-    application.add_handler(MessageHandler(filters.TEXT & filters.regex('^Имя$'), get_name))
-    application.add_handler(MessageHandler(filters.TEXT & filters.regex('^Телефон$'), get_phone))
-
     # Запускаем бота
     application.run_polling()
 
 
 if __name__ == '__main__':
-    main()
+    main() 
