@@ -21,35 +21,27 @@ except Exception as e:
 # Функция для команды /start
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     keyboard = [
-        ["Адреси склад 📍", "Нархнома 💲"],
+        ["Сурогаҳоҷ склад 📍", "Нарҳхо 💲"],
         ["Молҳои манъшуда ❌", "Контакт 👤"],
-        ["Тафтиши трек-код 🔍"]
-        # , ["Обуна шудан 👤"]
+        ["Тафтиши трек-код 🔍", "Дарси ройгон!"]
     ]
 
     reply_markup = ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
     await update.message.reply_text('Меню:', reply_markup=reply_markup)
 
-
 # Функция для обработки сообщений с кнопок
 async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     text = update.message.text
 
-    response = None  # Убираем двойное назначение
-
-    if text == "Адреси склад 📍":
+    if text == "Сурогаҳоҷ склад 📍":
         response = "1) НОМ ВА НОМЕРИ ШУМО \n2)13711652794\n3) 广州市荔湾区环市西路黑山三街20号宇宙鞋城E区113-119档8 Al-Kh /Шахр/Ном ва номери телефон"
         await update.message.reply_text(response)
-        # Отправляем фото после текста
-        await update.message.reply_photo("https://raw.githubusercontent.com/uskhurshed/cargo/master/photo_2024-10-08_19-49-26.jpg")
-    
-    elif text == "Нархнома 💲":
+
+    elif text == "Нарҳхо 💲":
         response = "Нархнома:\n1кг - 2,5$\n1куб - 250$"
         await update.message.reply_text(response)
-        # Отправляем фото после текста
-        await update.message.reply_photo("https://raw.githubusercontent.com/uskhurshed/cargo/master/photo_2024-10-08_18-58-32.jpg")
-    
+
     elif text == "Молҳои манъшуда ❌":
         response = "КАРГОИ МО ХАМИН ГУНА ЧИЗОРА ҚАБУЛ НАМЕКУНАД!\n1. Дорувори (парашок таблетка дорухои обаки)..."
         await update.message.reply_text(response)
@@ -60,6 +52,10 @@ async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 
     elif text == "Тафтиши трек-код 🔍":
         response = "Трек-коди худро ворид намоед:"
+        await update.message.reply_text(response)
+
+    elif text == "Дарси ройгон!":
+        response = "Присоединяйтесь к нашему каналу для бесплатного обучения: https://t.me/somon_sugd_cargo/31"
         await update.message.reply_text(response)
 
     else:
