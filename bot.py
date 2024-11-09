@@ -40,7 +40,7 @@ async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await update.message.reply_photo("https://raw.githubusercontent.com/uskhurshed/cargo/master/photo_2024-10-08_19-49-26.jpg")
 
     elif text == "Нархнома 💲":
-        response = "Нархнома:\n1кг - 2,5$\n1куб - 250$"
+        response = "Нархнома:\n1кг - 2,8$\n1куб - 290$"
         await update.message.reply_text(response)
         await update.message.reply_photo("https://raw.githubusercontent.com/uskhurshed/cargo/master/photo_2024-10-08_18-58-32.jpg")
 
@@ -49,7 +49,7 @@ async def handle_buttons(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await update.message.reply_text(response)
 
     elif text == "Контакт 👤":
-        response = "Контакт : www.instagram.com/somon_sugd_cargo \n Телефон +992926410241 Whatsapp, Telegram "
+        response = "Контакт : www.instagram.com/somon_sugd_cargo \n Телефон +992990050500 Whatsapp, Telegram "
         await update.message.reply_text(response)
 
     elif text == "Тафтиши трек-код 🔍":
